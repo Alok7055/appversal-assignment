@@ -50,13 +50,34 @@ textarea {
 
 .layout-grid {
   display: grid;
-  grid-template-columns: minmax(320px, 1fr) 420px;
+  grid-template-columns: minmax(320px, 1fr) 440px;
   gap: 24px;
 }
 
-.panel {
+.left-pane {
   display: grid;
   gap: 24px;
+}
+
+.tab-bar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.tab {
+  border: 1px solid #cbd5e1;
+  border-radius: 14px;
+  padding: 12px 18px;
+  background: #f8fafc;
+  color: #334155;
+  font-weight: 700;
+}
+
+.tab.active {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
 }
 
 .card,
@@ -174,16 +195,23 @@ button:hover {
   gap: 18px;
 }
 
+.mobile-screen {
+  display: flex;
+  justify-content: center;
+}
+
 .mobile-card {
   background: #f8fafc;
   padding: 20px;
   min-height: 420px;
+  width: 100%;
+  max-width: 360px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.preview-card .thank-you-card {
+.thank-you-card {
   background: #ffffff;
 }
 
@@ -253,21 +281,48 @@ button:hover {
   font-size: 1rem;
 }
 
-.thank-you-media {
-  width: 100%;
-  border-radius: 18px;
-  max-height: 180px;
-  object-fit: contain;
-  background: #ffffff;
+.range-value {
+  display: inline-block;
+  margin-top: 8px;
+  color: #475569;
+  font-size: 0.9rem;
 }
 
-.thank-you-content {
-  gap: 14px;
+.thank-you-media-wrapper {
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  background: #eef2ff;
+  margin-bottom: 18px;
+}
+
+.thank-you-media {
+  width: 100%;
+  max-height: 180px;
+  border-radius: 18px;
+  object-fit: contain;
+}
+
+.lottie-container {
+  width: 100%;
+  min-height: 180px;
+}
+
+.empty-media {
+  color: #64748b;
+  text-align: center;
+  padding: 20px;
 }
 
 @media (max-width: 1080px) {
   .layout-grid {
     grid-template-columns: 1fr;
+  }
+
+  .tab-bar {
+    flex-wrap: wrap;
   }
 }
 

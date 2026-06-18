@@ -4,6 +4,9 @@ import { StylePanel } from './components/StylePanel';
 import { PreviewPanel } from './components/PreviewPanel';
 import type { ContentState, StyleState } from './types';
 
+const tabs = ['Content', 'Styling'] as const;
+type Tab = (typeof tabs)[number];
+
 const initialContent: ContentState = {
   title: 'How was your experience with AppVersal?',
   subtitle: 'Tell us what worked and what we can improve.',
@@ -34,6 +37,7 @@ const initialStyle: StyleState = {
 };
 
 function App() {
+  const [activeTab, setActiveTab] = useState<Tab>('Content');
   const [content, setContent] = useState<ContentState>(initialContent);
   const [style, setStyle] = useState<StyleState>(initialStyle);
 
@@ -42,14 +46,30 @@ function App() {
       <header className="topbar">
         <div>
           <span className="brand">AppVersal</span>
-          <p>CSAT Campaign Builder — live preview with content and styling controls.</p>
+          <p>CSAT Campaign Builder — live preview updates instantly from Content and Styling.</p>
         </div>
       </header>
 
       <main className="layout-grid">
-        <section className="panel">
-          <ContentPanel content={content} onChange={setContent} />
-          <StylePanel style={style} onChange={setStyle} />
+        <section className="left-pane">
+          <div className="tab-bar">
+            {tabs.map((tab) => (
+              <button
+                key={tab}
+                type="button"
+                className={`tab ${activeTab === tab ? 'active' : ''}`}
+                onClick={() => setActiveTab(tab)}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+
+          {activeTab === 'Content' ? (
+            <ContentPanel content={content} onChange={setContent} />
+          ) : (
+            <StylePanel style={style} onChange={setStyle} />
+          )}
         </section>
 
         <aside className="preview-wrapper">
